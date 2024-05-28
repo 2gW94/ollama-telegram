@@ -4,6 +4,7 @@ from aiogram.filters.command import Command, CommandStart
 from aiogram.types import Message
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from func.interactions import *
+import html
 import asyncio
 import traceback
 import io
@@ -47,7 +48,8 @@ async def get_bot_info():
     return mention
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    start_message = f"Welcome, <b>{message.from_user.full_name}</b>!"
+    safe_name = html.escape(message.from_user.full_name)
+    start_message = f"Welcome, <b>{safe_name}</b>!"
     await message.answer(
         start_message,
         parse_mode=ParseMode.HTML,

@@ -3,10 +3,10 @@
   <a href="">
     <img src="res/github/ollama-telegram-readme.png" width="200" height="200">
   </a>
-  <h1>🦙 Ollama Telegram Bot</h1>
+  <h1>🦙 Ollama Telegram Бот</h1>
   <p>
-    <b>Chat with your LLM, using Telegram bot!</b><br>
-    <b>Feel free to contribute!</b><br>
+    <b>Общайтесь с вашим LLM, используя бота в Telegram!</b><br>
+    <b>Не стесняйтесь вносить свой вклад!</b><br>
   </p>
   <br>
   <p align="center">
@@ -15,47 +15,48 @@
   <br>
 </div>
 
-## Features
-Here's features that you get out of the box:
+## Особенности
+Вот особенности, которые вы получаете "из коробки":
 
-- [x] Fully dockerized bot
-- [x] Response streaming without ratelimit with **SentenceBySentence** method
-- [x] Mention [@] bot in group to receive answer
+- [x] Полностью докеризованный бот
+- [x] Потоковая передача ответов без ограничения частоты с **методом Предложение за Предложением**
+- [x] Упоминание [@] бота в группе для получения ответа
 
-## Roadmap
-- [x] Docker config & automated tags by [StanleyOneG](https://github.com/StanleyOneG), [ShrirajHegde](https://github.com/ShrirajHegde)
-- [x] History and `/reset` by [ShrirajHegde](https://github.com/ShrirajHegde)
-- [ ] Add more API-related functions [System Prompt Editor, Ollama Version fetcher, etc.]
-- [ ] Redis DB integration
-- [ ] Update bot UI
+## План работ
+- [x] Конфигурация Docker и автоматические теги от [StanleyOneG](https://github.com/StanleyOneG), [ShrirajHegde](https://github.com/ShrirajHegde)
+- [x] История и `/reset` от [ShrirajHegde](https://github.com/ShrirajHegde)
+- [ ] Добавить больше функций, связанных с API [Редактор системных подсказок, Получение версии Ollama и т. д.]
+- [ ] Интеграция с Redis DB
+- [ ] Обновление интерфейса бота
 
-## Prerequisites
-- [Telegram-Bot Token](https://core.telegram.org/bots#6-botfather)
+## Предварительные требования
+- [Токен Telegram-Bot](https://core.telegram.org/bots#6-botfather)
 
-## Installation (Non-Docker)
-+ Install latest [Python](https://python.org/downloads)
-+ Clone Repository
+## Установка (без Docker)
++ Установите последнюю версию [Python](https://python.org/downloads)
++ Клонируйте репозиторий
     ```
-    git clone https://github.com/ruecat/ollama-telegram
+    https://github.com/2gW94/ollama-telegram
     ```
-+ Install requirements from requirements.txt
++ Установите зависимости из requirements.txt
     ```
     pip install -r requirements.txt
     ```
-+ Enter all values in .env.example
++ Введите все значения в .env.example
 
-+ Rename .env.example -> .env
++ Переименуйте .env.example -> .env
 
-+ Launch bot
++ Запустите бота
 
     ```
     python3 run.py
     ```
-## Installation (Docker Image)
-The official image is available at dockerhub: [ruecat/ollama-telegram](https://hub.docker.com/r/ruecat/ollama-telegram)
 
-+ Download [.env.example](https://github.com/ruecat/ollama-telegram/blob/main/.env.example) file, rename it to .env and populate the variables.
-+ Create `docker-compose.yml` (optionally: uncomment GPU part of the file to enable Nvidia GPU)
+## Установка (Docker Image)
+Официальное изображение доступно на dockerhub: [ruecat/ollama-telegram](https://hub.docker.com/r/ruecat/ollama-telegram)
+
++ Скачайте файл [.env.example](https://github.com/ruecat/ollama-telegram/blob/main/.env.example), переименуйте его в .env и заполните переменные.
++ Создайте `docker-compose.yml` (необязательно: раскомментируйте часть файла с GPU, чтобы включить ускорение Nvidia GPU)
 
     ```yml
     version: '3.8'
@@ -73,8 +74,8 @@ The official image is available at dockerhub: [ruecat/ollama-telegram](https://h
         volumes:
           - ./ollama:/root/.ollama
         
-        # Uncomment to enable NVIDIA GPU
-        # Otherwise runs on CPU only:
+        # Раскомментируйте, чтобы включить NVIDIA GPU
+        # В противном случае работает только на CPU:
     
         # deploy:
         #   resources:
@@ -89,48 +90,47 @@ The official image is available at dockerhub: [ruecat/ollama-telegram](https://h
           - '11434:11434'
     ```
 
-+ Start the containers
++ Запустите контейнеры
 
     ```sh
     docker compose up -d
     ```
 
-
-## Installation (Build your own Docker image)
-+ Clone Repository
+## Установка (Создание собственного образа Docker)
++ Клонируйте репозиторий
     ```
     git clone https://github.com/ruecat/ollama-telegram
     ```
 
-+ Enter all values in .env.example
++ Введите все значения в .env.example
 
-+ Rename .env.example -> .env
++ Переименуйте .env.example -> .env
 
-+ Run ONE of the following docker compose commands to start:
-    1. To run ollama in docker container (optionally: uncomment GPU part of docker-compose.yml file to enable Nvidia GPU)
++ Запустите ОДНУ из следующих команд docker compose, чтобы начать:
+    1. Чтобы запустить ollama в контейнере Docker (необязательно: раскомментируйте часть файла docker-compose.yml с GPU, чтобы включить ускорение Nvidia GPU)
         ```
         docker compose up --build -d
         ```
 
-    2. To run ollama from locally installed instance (mainly for **MacOS**, since docker image doesn't support Apple GPU acceleration yet):
+    2. Для запуска ollama из установленного локально экземпляра (в основном для **MacOS**, так как образ Docker пока не поддерживает ускорение Apple GPU):
         ```
         docker compose up --build -d ollama-telegram
         ```
 
-## Environment Configuration
-|     Parameter     |                                                      Description                                                      | Required? | Default Value |                        Example                        |
-|:-----------------:|:---------------------------------------------------------------------------------------------------------------------:|:---------:|:-------------:|:-----------------------------------------------------:|
-|      `TOKEN`      | Your **Telegram bot token**.<br/>[[How to get token?]](https://core.telegram.org/bots/tutorial#obtain-your-bot-token) |    Yes    |  `yourtoken`  |             MTA0M****.GY5L5F.****g*****5k             |
-|    `ADMIN_IDS`    |                     Telegram user IDs of admins.<br/>These can change model and control the bot.                      |    Yes    |               | 1234567890<br/>**OR**<br/>1234567890,0987654321, etc. |
-|    `USER_IDS`     |                       Telegram user IDs of regular users.<br/>These only can chat with the bot.                       |    Yes    |               | 1234567890<br/>**OR**<br/>1234567890,0987654321, etc. |
-|    `INITMODEL`    |                                                      Default LLM                                                      |    No     |   `llama2`    |        mistral:latest<br/>mistral:7b-instruct         |
-| `OLLAMA_BASE_URL` |                                                  Your OllamaAPI URL                                                   |    No     |               |          localhost<br/>host.docker.internal           |
-|   `OLLAMA_PORT`   |                                                  Your OllamaAPI port                                                  |    No     |     11434     |                                                       |
-|   `TIMEOUT`       |                                                  The timeout in seconds for generating responses                      |    No     |     3000      |                                                       |
+## Конфигурация окружения
+|     Параметр     |                                                      Описание                                                      | Обязательный? | Значение по умолчанию |                          Пример                           |
+|:-----------------:|:---------------------------------------------------------------------------------------------------------------------:|:-------------:|:---------------------:|:---------------------------------------------------------:|
+|      `TOKEN`      | Ваш **токен Telegram бота**.<br/>[[Как получить токен?]](https://core.telegram.org/bots/tutorial#obtain-your-bot-token) |      Да       |       `yourtoken`      |               MTA0M****.GY5L5F.****g*****5k               |
+|    `ADMIN_IDS`    |                Идентификаторы пользователей Telegram администраторов.<br/>Они могут изменять модель и управлять ботом.                |      Да       |                       | 1234567890<br/>**ИЛИ**<br/>1234567890,0987654321, и т. д. |
+|    `USER_IDS`     |                     Идентификаторы пользователей Telegram обычных пользователей.<br/>Они могут только общаться с ботом.                      |      Да       |                       |   1234567890<br/>**ИЛИ** 1234567890,0987654321, и т. д.   |
+|    `INITMODEL`    |                                                      LLM по умолчанию                                                      |      Нет      |        `llama2`        |        mistral:latest<br/>mistral:7b-instruct         |
+| `OLLAMA_BASE_URL` |                                                  Ваш URL OllamaAPI                                                   |      Нет      |                       |          localhost<br/>host.docker.internal           |
+|   `OLLAMA_PORT`   |                                                  Порт вашего OllamaAPI                                                  |      Нет      |         11434         |                                                       |
+|   `TIMEOUT`       |                                                  Время ожидания в секундах для генерации ответов                      |      Нет      |         3000          |                                                       |
 
 
-## Credits
+## Благодарности
 + [Ollama](https://github.com/jmorganca/ollama)
 
-## Libraries used
+## Используемые библиотеки
 + [Aiogram 3.x](https://github.com/aiogram/aiogram)
